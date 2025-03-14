@@ -113,7 +113,7 @@
 
     <script type="text/javascript">
       // LIST FOLDERS TO LOAD
-      var fonts = [''];
+      var fonts = ['catherinecoloma', 'ZuhengWebV1', 'RoyaleVariable', 'Spiky-Serif', 'ksenia_div_V5', 'tinsel-1', 'tag', 'Hopla_div'];
 
       var data = {};
       let fontsSelect = document.getElementById("fonts-select");
@@ -127,7 +127,7 @@
 
       for (let f of fonts) {
 
-        fetch(`${f}/script.js`).then((v) => {
+        fetch(`projects/${f}/script.js`).then((v) => {
           v.text().then((txt) => {
             eval(`var details = ${txt.match(/{(.*?)}/s)[0]}`); // hack to extract details
             data[f] = details;
@@ -152,7 +152,7 @@
         // console.log(data[val])
         fontsStudent.innerHTML = data[val].student_name;
         fontsDesc.innerHTML = data[val].description;
-        fontsFrame.src = val + "?" + Math.floor(Math.random() * 99999);
+        fontsFrame.src = 'projects/' + val + "?" + Math.floor(Math.random() * 99999);
       }
 
       function toggleAbout() {

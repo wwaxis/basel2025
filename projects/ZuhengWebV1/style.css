@@ -1,0 +1,53 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  /*--------------------------------------------------------------------------------------*/
+  font-family: "Custom", sans-serif; /* Font family */
+  background-color: black; /* Background color - can be changed later */
+  color: white; /* Text color */
+  /*--------------------------------------------------------------------------------------*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Load the variable font from the local folder */
+@font-face {
+  font-family: "Roboto";
+  src: url("fonts/Roboto-VariableFont_wdth,wght.ttf") format("truetype");
+  font-weight: 100 700; /* Specify the weight range */
+  font-stretch: 100% 100%; /* Optional: if the font supports width (wdth) */
+  font-display: swap; /* Ensures that text is visible while the font is loading */
+}
+
+@font-face {
+  font-family: "Custom";
+  /*-------------------------------------------------------------------------------------*/
+  src: url("fonts/ZudisLightVF.ttf") format("truetype");
+  /*src: url("fonts/UnkownKnownVF.ttf") format("truetype");*/
+  /*src: url("fonts/Busstop_1VF.ttf") format("truetype");*/
+
+  /*-------------------------------------------------------------------------------------*/
+
+  font-weight: 100 700; /* Specify the weight range */
+  font-stretch: 100% 100%; /* Optional: if the font supports width (wdth) */
+  font-display: swap; /* Ensures that text is visible while the font is loading */
+}
+
+/* Container with centered text */
+#container {
+  /*-------------------------------------------------------------------------------------*/
+  font-size: 8rem; /* Font size - can be adjusted later */
+  /*-------------------------------------------------------------------------------------*/
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
