@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Variable Fonts Workshop - Lena Weber - IDCE HGK FHNW</title>
+    <style type="text/css">
+      body {
+        font-family: monospace;
+        margin: 0px;
+      }
+      * {
+        outline: none;
+      }
+      a {
+        color: #fff;
+      }
+      #fonts-select {
+        position: fixed;
+        mix-blend-mode: DIFFERENCE;
+        left: 5px;
+        top: 5px;
+        font-size: 18pt;
+        border: none;
+        border: 1px solid #fff;
+        border-radius: 5px;
+        background: none;
+        color: #fff;
+      }
+      #fonts-frame {
+        height: 100vh;
+        width: 100vw;
+        border: none;
+      }
+      .font-item {
+        margin-bottom: 25px;
+      }
+      .font-name {
+        font-size: 200%;
+      }
+      .font-student {
+        font-size: 100%;
+        text-indent: 2em;
+      }
+      .font-desc {
+        font-style: italic;
+        text-indent: 2em;
+      }
+      #nav {
+        color: #fff;
+        mix-blend-mode: DIFFERENCE;
+        position: fixed;
+        /*			display:flex;*/
+      }
+      .nav-item {
+        position: fixed;
+        mix-blend-mode: DIFFERENCE;
+        color: #fff;
+        /*			max-width:25vw;*/
+        /*			flex-grow: 1;*/
+      }
+
+      #nav-font-student {
+        left: 10px;
+        bottom: 5px;
+        /*			flex-grow: 1;*/
+      }
+      #nav-font-desc {
+        right: 5px;
+        bottom: 5px;
+        max-width: 75vw;
+      }
+      #nav-font-about {
+        right: 5px;
+        top: 5px;
+        font-size: 18pt;
+        cursor: pointer;
+      }
+      #nav-font-about-details {
+        width: 25vw;
+        font-size: 12pt;
+        text-align: right;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="nav-item">
+      <select id="fonts-select" onchange="getFont(this.value)"></select>
+    </div>
+
+    <div class="nav-item" id="nav-font-student"></div>
+    <div class="nav-item" id="nav-font-desc"></div>
+    <div class="nav-item" id="nav-font-about">
+      <a onclick="toggleAbout()"><div style="float: right">?</div></a><br />
+      <div id="nav-font-about-details">
+        Variable Font Workshop by
+        <a href="https://lenaweber.com/" target="_blank">Lena Weber</a><br />
+        <a href="https://www.mdesbasel.ch/" target="_blank">MDes</a> /
+        <a
+          href="https://www.fhnw.ch/en/degree-programmes/art-and-design/master-of-arts/master-of-arts-fhnw-in-design-digital-communication-environments"
+          target="_blank"
+          >MA</a>
+        <a href="https://idce.ch/" target="_blank">IDCE HGK FHNW</a> // Spring 2025<br /><br />
+        In this workshop, students learnt about variable font technology as an
+        experimental animation tool. Interpolation Escalation! We started
+        typographic systems, designed letterings and, above all, interpolated
+        back and forth. In a mix of digital and analogue sketches, students came
+        up with ideas for variable fonts exploring the intersection of
+        readability, modularity, movement and math.
+      </div>
+    </div>
+    <iframe src="" id="fonts-frame"></iframe>
+
+    <script type="text/javascript">
+      // LIST FOLDERS TO LOAD
+      var fonts = [''];
+
+      var data = {};
+      let fontsSelect = document.getElementById("fonts-select");
+      let fontsFrame = document.getElementById("fonts-frame");
+      let fontsStudent = document.getElementById("nav-font-student");
+      let fontsDesc = document.getElementById("nav-font-desc");
+      let fontsAboutDetails = document.getElementById("nav-font-about-details");
+      // let fontsHolder = document.getElementById('fonts-holder')
+
+      shuffleArray(fonts);
+
+      for (let f of fonts) {
+
+        fetch(`${f}/script.js`).then((v) => {
+          v.text().then((txt) => {
+            eval(`var details = ${txt.match(/{(.*?)}/s)[0]}`); // hack to extract details
+            data[f] = details;
+            fontsSelect.innerHTML += `<option value="${f}">${details.font_name}</option>`;
+            // console.log(details)
+            // fontsHolder.innerHTML += `<div class="font-item">
+            // <div class="font-name">${details.font_name}</div>
+            // <div class="font-student">${details.student_name}</div>
+            // <div class="font-desc">${details.description}</div>
+            // </div>`
+          });
+        });
+      }
+
+      setTimeout(() => {
+        getFont(fonts[0]);
+        fontsAboutDetails.style.display = "none";
+      }, 100);
+
+      function getFont(val) {
+        // console.log(val)
+        // console.log(data[val])
+        fontsStudent.innerHTML = data[val].student_name;
+        fontsDesc.innerHTML = data[val].description;
+        fontsFrame.src = val + "?" + Math.floor(Math.random() * 99999);
+      }
+
+      function toggleAbout() {
+        if (fontsAboutDetails.style.display == "none") {
+          fontsAboutDetails.style.display = "block";
+        } else {
+          fontsAboutDetails.style.display = "none";
+        }
+      }
+
+      /* Randomize array in-place using Durstenfeld shuffle algorithm */
+      function shuffleArray(array) {
+        for (var i = array.length - 1; i >= 0; i--) {
+          var j = Math.floor(Math.random() * (i + 1));
+          var temp = array[i];
+          array[i] = array[j];
+          array[j] = temp;
+        }
+      }
+    </script>
+  </body>
+</html>
