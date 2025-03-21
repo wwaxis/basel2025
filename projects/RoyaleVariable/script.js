@@ -9,12 +9,12 @@ let details = {
 // Configurable min and max values for the font axes (easy to change by students)
 const config = {
     // Custom axis names (students can change these to whatever they want)
-    weightAxis: "wght",    // Axis name for weight (can be changed)
-    widthAxis: "wdth",     // Axis name for width (can be changed)
+    weightAxis: "wdth",    // Axis name for weight (can be changed)
+    widthAxis: "wght",     // Axis name for width (can be changed)
 
     minWeight: 0,        // Minimum value for 'wght' axis (font weight)
     maxWeight: 100,        // Maximum value for 'wght' axis (font weight)
-    minWidth: 75,          // Minimum value for 'wdth' axis (font width)
+    minWidth: 0,          // Minimum value for 'wdth' axis (font width)
     maxWidth: 100,        // Maximum value for 'wdth' axis (font width)
 };
 
