@@ -62,7 +62,7 @@ function animateBreathing(timestamp) {
     const wave = (1 + Math.cos(timestamp/1000)) /2 ;  // ⬅ Fix here
     const widthValue = config.minWidth + wave * (config.maxWidth - config.minWidth);
 
-    console.log("wave", wave)
+    // console.log("wave", wave)
 
     spans.forEach((span) => {
         span.setAttribute("data-width", widthValue);
