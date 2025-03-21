@@ -125,6 +125,8 @@
 
       shuffleArray(fonts);
 
+      let fontCountdown = fonts.length;
+
       for (let f of fonts) {
 
         fetch(`projects/${f}/script.js`).then((v) => {
@@ -132,20 +134,19 @@
             eval(`var details = ${txt.match(/{(.*?)}/s)[0]}`); // hack to extract details
             data[f] = details;
             fontsSelect.innerHTML += `<option value="${f}">${details.font_name}</option>`;
-            // console.log(details)
-            // fontsHolder.innerHTML += `<div class="font-item">
-            // <div class="font-name">${details.font_name}</div>
-            // <div class="font-student">${details.student_name}</div>
-            // <div class="font-desc">${details.description}</div>
-            // </div>`
+        
+            fontCountdown--;
+            if(fontCountdown == 0){
+               initFonts();
+            }
           });
         });
       }
 
-      setTimeout(() => {
+      function initFonts(){
         getFont(fonts[0]);
         fontsAboutDetails.style.display = "none";
-      }, 100);
+      }
 
       function getFont(val) {
         // console.log(val)
